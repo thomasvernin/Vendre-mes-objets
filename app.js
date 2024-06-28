@@ -1,5 +1,12 @@
 const express = require('express');
+const mongoose = require('mongoose'); 
 const app = express();
+
+
+mongoose.connect('mongodb+srv://tvernin49100:tvernin49100@thomasvernin.d5v4iay.mongodb.net/?retryWrites=true&w=majority&appName=Thomasvernin', 
+  { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connexion à MongoDB réussie !'))
+  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 app.use(express.json());
 
@@ -10,16 +17,13 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
 app.post('/api/stuff', (req, res, next) => {
-    console.log(req.body);
-    res.status(201).json({
-      message: 'Objet créé !'
-    });
+  console.log(req.body);
+  res.status(201).json({
+    message: 'Objet créé !'
   });
+});
 
-  
 app.get('/api/stuff', (req, res, next) => {
   const stuff = [
     {
@@ -43,3 +47,4 @@ app.get('/api/stuff', (req, res, next) => {
 });
 
 module.exports = app;
+
