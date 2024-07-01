@@ -4,6 +4,7 @@ const app = express();
 
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user');
+const path = require('path');
 
 mongoose.connect('mongodb+srv://tvernin49100:tvernin49100@thomasvernin.d5v4iay.mongodb.net/nom_de_votre_base_de_donnees',
   { useNewUrlParser: true, useUnifiedTopology: true })
@@ -22,6 +23,7 @@ app.use((req, res, next) => {
 
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;
 
